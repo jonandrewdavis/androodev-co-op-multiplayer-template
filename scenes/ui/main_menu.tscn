@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://c4q8uea8d6p8k"]
+
+[ext_resource type="Script" uid="uid://cyavwb4iw6rub" path="res://scenes/ui/main_menu.gd" id="1_sl1te"]
+
+[node name="MainMenu" type="CanvasLayer" unique_id=1482325763]
+script = ExtResource("1_sl1te")
+
+[node name="Control" type="Control" parent="." unique_id=2009268844]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Center" type="PanelContainer" parent="Control" unique_id=882952804]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Center" unique_id=57966873]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Center/MarginContainer" unique_id=85887884]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Center/MarginContainer/VBoxContainer" unique_id=225050093]
+layout_mode = 2
+text = "Androo Game"
+
+[node name="ButtonJoin" type="Button" parent="Control/Center/MarginContainer/VBoxContainer" unique_id=197219473]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Join"
+
+[node name="ButtonQuit" type="Button" parent="Control/Center/MarginContainer/VBoxContainer" unique_id=1133431028]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Quit"

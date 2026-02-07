@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://dbcqeo103wau6"]
+
+[ext_resource type="Script" uid="uid://bqta7emfadpxj" path="res://scenes/player/player.gd" id="1_wr5hl"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o8nba"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wr5hl"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gfjak"]
+top_radius = 0.3
+bottom_radius = 0.1
+height = 1.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wr5hl"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Head:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="Player" type="CharacterBody3D" unique_id=1582534974]
+collision_layer = 9
+script = ExtResource("1_wr5hl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1789704607]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_o8nba")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2062670380]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_wr5hl")
+
+[node name="Head" type="Node3D" parent="." unique_id=2071305103]
+unique_name_in_owner = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head" unique_id=659649992]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.4010596, -0.38197786)
+mesh = SubResource("CylinderMesh_gfjak")
+
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=2014816838]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=447432846]
+replication_config = SubResource("SceneReplicationConfig_wr5hl")
+
+[node name="Nameplate" type="Label3D" parent="." unique_id=2093794407]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4974716, 0)
+billboard = 2
+fixed_size = true
+text = "Peer ID"
+font_size = 24
+outline_size = 8
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1190293794]
+
+[node name="Menu" type="Control" parent="CanvasLayer" unique_id=68847478]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Menu" unique_id=28982625]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Menu/PanelContainer" unique_id=763618636]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="ButtonLeave" type="Button" parent="CanvasLayer/Menu/PanelContainer/MarginContainer" unique_id=196040560]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Leave Game"
