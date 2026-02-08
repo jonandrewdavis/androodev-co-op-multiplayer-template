@@ -3,9 +3,26 @@ extends Node
 const PLAYER = preload("uid://dbcqeo103wau6")
 
 var enet_peer := ENetMultiplayerPeer.new()
+var tube_client: TubeClient
 
 var PORT = 9999
 var IP_ADDRESS = '127.0.0.1'
+
+func tube_create():
+	multiplayer.peer_connected.connect(add_player)
+	multiplayer.peer_disconnected.connect(remove_player)
+	tube_client.create_session()
+	add_player(1)
+	
+func tube_join(session_id: String):
+	multiplayer.peer_connected.connect(add_player) 
+	multiplayer.peer_disconnected.connect(remove_player)
+	multiplayer.connected_to_server.connect(on_connected_to_server)
+	tube_client.join_session(session_id)
+	
+func tube_leave():
+	tube_client.leave_session()
+	leave_server()
 
 func start_server():
 	enet_peer.create_server(PORT)
@@ -24,8 +41,8 @@ func on_connected_to_server():
 	add_player(multiplayer.get_unique_id())
 
 func add_player(peer_id: int):
-	if peer_id == 1:
-		return
+	#if peer_id == 1:
+		#return
 	
 	var new_player = PLAYER.instantiate()
 	new_player.name = str(peer_id)
@@ -39,6 +56,7 @@ func add_player(peer_id: int):
 func remove_player(peer_id):
 	if peer_id == 1:
 		leave_server()
+		return
 	
 	var players: Array[Node] = get_tree().get_nodes_in_group('Players')
 	var player_to_remove = players.find_custom(func(item): return item.name == str(peer_id))
