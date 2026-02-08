@@ -1,6 +1,6 @@
 # androo-dev-co-op-multiplayer
 
-A complete template and tutorial from [AndrooDev](https://www.youtube.com/@AndrooDev). Uses client authority to make it easy to start a PVE or Co-Op multiplayer game from scratch.
+A complete template and tutorial from [AndrooDev on YouTube](https://www.youtube.com/watch?v=NvG08tA06xQ). Uses client authority to make it easy to start a PVE or Co-Op multiplayer game from scratch.
 
 |             Twitch             |              Youtube               |
 | :----------------------------: | :--------------------------------: |
