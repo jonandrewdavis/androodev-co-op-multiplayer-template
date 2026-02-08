@@ -1,6 +1,6 @@
 # androo-dev-co-op-multiplayer
 
-A complete template and tutorial from [https://www.youtube.com/@AndrooDev](https://www.youtube.com/@AndrooDev). Uses client authority to make it easy to start a PVE or Co-Op multiplayer game from scratch.
+A complete template and tutorial from [AndrooDev](https://www.youtube.com/@AndrooDev). Uses client authority to make it easy to start a PVE or Co-Op multiplayer game from scratch.
 
 |             Twitch             |              Youtube               |
 | :----------------------------: | :--------------------------------: |
@@ -12,7 +12,6 @@ A complete template and tutorial from [https://www.youtube.com/@AndrooDev](https
 
 - Clone this project
 - Import in Godot 4.6
-
 - You may need to disable Game Embed.
   - Open Godot menu -> Select Editor Settings
   - Search Embed
