@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="androodev-coop-template"
+config/name="androodev-co-op-template"
 run/main_scene="uid://drhjatayvlkyv"
 config/features=PackedStringArray("4.6", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://cateu5bxe5nab"
 
 [autoload]
 
