@@ -656,10 +656,10 @@ func _initiate_peer(p_peer_id: int) -> TubePeer:
 	peer.closed.connect(
 		_on_peer_closed.bind(peer)
 	)
-		#peer.port_mapped.connect(
-			#_upnp.add_port_mapping
-		#)
-	
+	peer.port_mapped.connect(
+		_upnp.add_port_mapping
+	)
+
 	_peers[p_peer_id] = peer
 	_peer_initiated.emit(peer)
 	error = multiplayer_peer.add_peer(peer, p_peer_id)

@@ -15,6 +15,7 @@ const JUMP_VELOCITY = 4.5
 @onready var session_id: Label = %SessionId
 @onready var button_copy_session: Button = %ButtonCopySession
 
+var immobile := false
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(int(name))
@@ -31,15 +32,14 @@ func _ready():
 	
 	camera_3d.current = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	button_leave.pressed.connect(func(): Network.tube_leave())
+	button_leave.pressed.connect(func(): Network.leave_server())
 	
 	session_id.text = Network.tube_client.session_id
 	button_copy_session.pressed.connect(func(): DisplayServer.clipboard_set(Network.tube_client.session_id))
 
-	
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not is_multiplayer_authority():
+	if not is_multiplayer_authority() or immobile	:
 		return
 	
 	if event is InputEventMouseMotion:
@@ -48,20 +48,32 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera_3d.rotation.x = clamp(camera_3d.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed('menu') and menu.visible == false:
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		menu.show()
-	elif Input.is_action_just_pressed('menu') and menu.visible == true:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		menu.hide()
+	if Input.is_action_just_pressed('menu'): 
+		open_menu(menu.visible)
+
+	if immobile: 
+		return
 
 	if Input.is_action_just_pressed('shoot'):
-		shoot()	
+		shoot()
+		
+func open_menu(current_visibility: bool):
+	menu.visible = !current_visibility
+
+	immobile = menu.visible
+	if menu.visible:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+
+	if immobile:
+		return
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():

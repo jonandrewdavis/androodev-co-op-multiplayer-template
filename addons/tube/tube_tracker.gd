@@ -23,7 +23,6 @@ const CLOSE_CODE_FAILED: int = 3002
 # https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/close, custom code 3000-4999
 # https://www.rfc-editor.org/rfc/rfc6455.html#section-7.4.1
 
-
 var error_message: String
 var socket := WebSocketPeer.new()
 var state := socket.get_ready_state()

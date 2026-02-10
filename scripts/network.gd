@@ -19,10 +19,6 @@ func tube_join(session_id: String):
 	multiplayer.peer_disconnected.connect(remove_player)
 	multiplayer.connected_to_server.connect(on_connected_to_server)
 	tube_client.join_session(session_id)
-	
-func tube_leave():
-	tube_client.leave_session()
-	leave_server()
 
 func start_server():
 	enet_peer.create_server(PORT)
@@ -64,6 +60,8 @@ func remove_player(peer_id):
 		players[player_to_remove].queue_free()
 		
 func leave_server():
+	if tube_client:
+		tube_client.leave_session()
 	multiplayer.multiplayer_peer.close()
 	multiplayer.multiplayer_peer = null
 	clean_up_signals()
