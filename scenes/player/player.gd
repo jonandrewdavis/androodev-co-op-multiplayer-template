@@ -92,7 +92,13 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 func shoot():
-	var facing_dir = -head.transform.basis.z
 	var force = 100
 	var pos = global_position
-	Global.shoot_ball.rpc_id(1, pos, facing_dir, force)
+	var shoot_dir = get_shoot_direction()
+	Global.shoot_ball.rpc_id(1, pos, shoot_dir, force)
+	
+func get_shoot_direction() -> Vector3:
+	var viewport_rect = get_viewport().get_visible_rect().size
+	var raycast_start = camera_3d.project_ray_origin(viewport_rect / 2)
+	var raycast_end = raycast_start + camera_3d.project_ray_normal(viewport_rect / 2) * 280
+	return -(raycast_start - raycast_end).normalized()
