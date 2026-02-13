@@ -37,6 +37,8 @@ func _ready():
 	session_id.text = Network.tube_client.session_id
 	button_copy_session.pressed.connect(func(): DisplayServer.clipboard_set(Network.tube_client.session_id))
 	DisplayServer.clipboard_set(Network.tube_client.session_id)
+	
+	nameplate.text = Global.username
 
 
 func _unhandled_input(event: InputEvent) -> void:

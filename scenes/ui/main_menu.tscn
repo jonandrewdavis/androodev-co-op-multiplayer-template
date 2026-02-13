@@ -64,6 +64,14 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Androo Game"
 
+[node name="LabelUsername" type="Label" parent="Control/Center/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=27057708]
+layout_mode = 2
+text = "Username"
+
+[node name="InputUsername" type="LineEdit" parent="Control/Center/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=889329747]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="Label2" type="Label" parent="Control/Center/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=818622073]
 layout_mode = 2
 text = "Session ID"
@@ -72,6 +80,10 @@ text = "Session ID"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Control/Center/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=356921719]
+layout_mode = 2
+theme_override_constants/separation = 24
 
 [node name="ButtonJoinTube" type="Button" parent="Control/Center/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1324231006]
 unique_name_in_owner = true

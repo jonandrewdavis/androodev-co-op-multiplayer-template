@@ -7,6 +7,7 @@ extends CanvasLayer
 @onready var button_quit_tube: Button = %ButtonQuitTube
 @onready var button_create_tube: Button = %ButtonCreateTube
 @onready var input_session_id: LineEdit = %InputSessionId
+@onready var input_username: LineEdit = %InputUsername
 
 const WORLD_FOREST = preload("uid://yubh30707eb7")
 const PLAYER = preload("uid://dbcqeo103wau6")
@@ -18,6 +19,8 @@ func _ready() -> void:
 	button_join_tube.pressed.connect(on_join_tube)
 	button_quit_tube.pressed.connect(func(): get_tree().quit())
 	button_create_tube.pressed.connect(on_tube_create)
+	
+	input_username.text_changed.connect(func(new_text): Global.username = new_text)
 	
 	if OS.has_feature('server'):
 		Network.start_server()
@@ -38,6 +41,3 @@ func on_tube_create():
 func add_world():
 	get_tree().current_scene.add_child(WORLD_FOREST.instantiate())
 	hide()
-
-func handle_tube_error(_code, _message):
-	show()

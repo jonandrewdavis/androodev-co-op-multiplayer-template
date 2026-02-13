@@ -1,5 +1,7 @@
 extends Node
 
+var username: String
+
 var forest: Node3D
 var spawn_container: Node3D
 
