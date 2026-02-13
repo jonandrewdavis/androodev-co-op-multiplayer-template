@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dab2wodnessni"
 path.s3tc="res://.godot/imported/texture_08.png-5cb608f2a5939ffc202f2f80993b7ef0.s3tc.ctex"
+path.etc2="res://.godot/imported/texture_08.png-5cb608f2a5939ffc202f2f80993b7ef0.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/kenney_prototype-textures/PNG/Red/texture_08.png"
-dest_files=["res://.godot/imported/texture_08.png-5cb608f2a5939ffc202f2f80993b7ef0.s3tc.ctex"]
+dest_files=["res://.godot/imported/texture_08.png-5cb608f2a5939ffc202f2f80993b7ef0.s3tc.ctex", "res://.godot/imported/texture_08.png-5cb608f2a5939ffc202f2f80993b7ef0.etc2.ctex"]
 
 [params]
 
