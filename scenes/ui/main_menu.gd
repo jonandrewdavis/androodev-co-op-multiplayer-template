@@ -19,7 +19,9 @@ func _ready() -> void:
 	button_join_tube.pressed.connect(on_join_tube)
 	button_quit_tube.pressed.connect(func(): get_tree().quit())
 	button_create_tube.pressed.connect(on_tube_create)
-	
+
+	button_join_tube.disabled = true
+	input_session_id.text_changed.connect(func(_new): button_join_tube.disabled = false)
 	input_username.text_changed.connect(func(new_text): Global.username = new_text)
 	
 	if OS.has_feature('server'):
@@ -32,7 +34,7 @@ func on_join():
 
 func on_join_tube():
 	Network.tube_join(input_session_id.text)
-	add_world()
+	multiplayer.connected_to_server.connect(add_world)
 
 func on_tube_create():
 	Network.tube_create()
@@ -41,3 +43,7 @@ func on_tube_create():
 func add_world():
 	get_tree().current_scene.add_child(WORLD_FOREST.instantiate())
 	hide()
+
+	
+	 
+	

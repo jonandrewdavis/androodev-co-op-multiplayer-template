@@ -38,8 +38,7 @@ func _ready():
 	button_copy_session.pressed.connect(func(): DisplayServer.clipboard_set(Network.tube_client.session_id))
 	DisplayServer.clipboard_set(Network.tube_client.session_id)
 	
-	nameplate.text = Global.username
-
+	if Global.username: nameplate.text = Global.username
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_multiplayer_authority() or immobile:
