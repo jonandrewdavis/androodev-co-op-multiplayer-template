@@ -21,7 +21,11 @@ func _enter_tree() -> void:
 	set_multiplayer_authority(int(name))
 
 func _ready():
-	if not multiplayer.is_server():
+	menu.hide()
+	add_to_group("Players")
+	nameplate.text = name
+
+	if not is_multiplayer_authority():
 		set_process(false)
 		set_physics_process(false)
 		return
