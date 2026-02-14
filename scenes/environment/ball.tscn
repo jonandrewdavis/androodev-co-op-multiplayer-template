@@ -24,7 +24,7 @@ properties/1/spawn = true
 properties/1/replication_mode = 1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sblyl"]
-radius = 0.2
+radius = 0.4
 
 [node name="Ball" type="RigidBody3D" unique_id=1248059213]
 collision_layer = 0

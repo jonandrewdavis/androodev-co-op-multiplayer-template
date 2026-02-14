@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bqta7emfadpxj" path="res://scenes/player/player.gd" id="1_wr5hl"]
 [ext_resource type="Texture2D" uid="uid://pxj3b3e28fg3" path="res://addons/tube/inspector/icons/clipboard_icon.tres" id="2_gfjak"]
+[ext_resource type="AudioStream" uid="uid://cdov6nnydfvny" path="res://assets/sound/click.mp3" id="3_4kuee"]
+[ext_resource type="AudioStream" uid="uid://d0xrt28ytpro" path="res://assets/sound/ping.mp3" id="4_524rm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o8nba"]
 
@@ -142,3 +144,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gfjak")
+
+[node name="AudioHit" type="AudioStreamPlayer" parent="." unique_id=1414008272]
+unique_name_in_owner = true
+stream = ExtResource("3_4kuee")
+
+[node name="AudioPing" type="AudioStreamPlayer" parent="." unique_id=339391477]
+unique_name_in_owner = true
+stream = ExtResource("4_524rm")
