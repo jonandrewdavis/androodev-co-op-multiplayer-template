@@ -8,8 +8,8 @@ func take_damage(damage: int, source: int):
 	var player_index = players.find_custom(func(item): return item.name == str(source))
 
 	if next_health == 0:
-		players[player_index].register_hit.rpc(true)
+		players[player_index].register_hit.rpc_id(source, true)
 		queue_free()
 	else:
-		players[player_index].register_hit.rpc()
+		players[player_index].register_hit.rpc_id(source)
 		health = next_health
