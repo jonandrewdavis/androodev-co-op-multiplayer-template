@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c4q8uea8d6p8k"]
 
 [ext_resource type="Script" uid="uid://cyavwb4iw6rub" path="res://scenes/ui/main_menu.gd" id="1_sl1te"]
+[ext_resource type="Texture2D" uid="uid://cqibqku84s77x" path="res://addons/tube/icons/tube_context.svg" id="2_m1kxf"]
 
 [node name="MainMenu" type="CanvasLayer" unique_id=1482325763]
 script = ExtResource("1_sl1te")
@@ -34,19 +35,73 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/Center/MarginContainer" unique_id=85887884]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Center/MarginContainer" unique_id=1634587359]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Control/Center/MarginContainer/VBoxContainer" unique_id=225050093]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Center/MarginContainer/HBoxContainer" unique_id=85887884]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Center/MarginContainer/HBoxContainer/VBoxContainer" unique_id=225050093]
 layout_mode = 2
 text = "Androo Game"
 
-[node name="ButtonJoin" type="Button" parent="Control/Center/MarginContainer/VBoxContainer" unique_id=197219473]
+[node name="ButtonJoin" type="Button" parent="Control/Center/MarginContainer/HBoxContainer/VBoxContainer" unique_id=197219473]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Join"
 
-[node name="ButtonQuit" type="Button" parent="Control/Center/MarginContainer/VBoxContainer" unique_id=1133431028]
+[node name="ButtonQuit" type="Button" parent="Control/Center/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1133431028]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Quit"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/Center/MarginContainer/HBoxContainer" unique_id=510879359]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Center/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1818955481]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Androo Game"
+
+[node name="LabelUsername" type="Label" parent="Control/Center/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=27057708]
+layout_mode = 2
+text = "Username"
+
+[node name="InputUsername" type="LineEdit" parent="Control/Center/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=889329747]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LabelSessionId" type="Label" parent="Control/Center/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=818622073]
+layout_mode = 2
+text = "Session ID"
+
+[node name="InputSessionId" type="LineEdit" parent="Control/Center/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1890589693]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Control/Center/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=356921719]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="ButtonJoinTube" type="Button" parent="Control/Center/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1324231006]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+text = "Join Session"
+
+[node name="ButtonQuitTube" type="Button" parent="Control/Center/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1623427286]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+text = "Quit"
+
+[node name="ButtonCreateTube" type="Button" parent="Control/Center/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=833379068]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/icon_max_width = 24
+theme_override_font_sizes/font_size = 12
+theme_override_icons/icon = ExtResource("2_m1kxf")
+text = "Create Session"

@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+class_name Player
+
 @export var sensitivity: float = 0.002
 
 const SPEED = 5.0
@@ -12,25 +14,42 @@ const JUMP_VELOCITY = 4.5
 @onready var menu: Control = %Menu
 @onready var button_leave: Button = %ButtonLeave
 
+@onready var session_id: Label = %SessionId
+@onready var button_copy_session: Button = %ButtonCopySession
+@onready var audio_hit: AudioStreamPlayer = %AudioHit
+@onready var audio_ping: AudioStreamPlayer = %AudioPing
+@onready var label_hit: Label = %LabelHit
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
+
+var immobile := false
+
 func _enter_tree() -> void:
 	set_multiplayer_authority(int(name))
 
 func _ready():
 	menu.hide()
+	label_hit.hide()
 	add_to_group("Players")
 	nameplate.text = name
-	
+
 	if not is_multiplayer_authority():
 		set_process(false)
 		set_physics_process(false)
+		canvas_layer.queue_free()
 		return
 	
 	camera_3d.current = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	button_leave.pressed.connect(func(): Network.leave_server())		
+	button_leave.pressed.connect(func(): Network.leave_server())
+	
+	session_id.text = Network.tube_client.session_id
+	button_copy_session.pressed.connect(func(): DisplayServer.clipboard_set(Network.tube_client.session_id))
+	DisplayServer.clipboard_set(Network.tube_client.session_id)
+	
+	if Global.username: nameplate.text = Global.username
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not is_multiplayer_authority():
+	if not is_multiplayer_authority() or immobile:
 		return
 	
 	if event is InputEventMouseMotion:
@@ -39,15 +58,24 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera_3d.rotation.x = clamp(camera_3d.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed('menu') and menu.visible == false:
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		menu.show()
-	elif Input.is_action_just_pressed('menu') and menu.visible == true:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		menu.hide()
+	if Input.is_action_just_pressed('menu'): 
+		open_menu(menu.visible)
+
+	if immobile: 
+		return
 
 	if Input.is_action_just_pressed('shoot'):
-		shoot()	
+		shoot()
+		
+func open_menu(current_visibility: bool):
+	menu.visible = !current_visibility
+
+	immobile = menu.visible
+	if menu.visible:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -72,7 +100,24 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 func shoot():
-	var facing_dir = -head.transform.basis.z
 	var force = 100
 	var pos = global_position
-	Global.shoot_ball.rpc_id(1, pos, facing_dir, force)
+	var shoot_dir = get_shoot_direction()
+	Global.shoot_ball.rpc_id(1, pos, shoot_dir, force)
+	
+func get_shoot_direction() -> Vector3:
+	var viewport_rect = get_viewport().get_visible_rect().size
+	var raycast_start = camera_3d.project_ray_origin(viewport_rect / 2)
+	var raycast_end = raycast_start + camera_3d.project_ray_normal(viewport_rect / 2) * 280
+	return -(raycast_start - raycast_end).normalized()
+
+@rpc('any_peer', 'call_local')
+func register_hit(is_dead = false):
+	if is_dead:
+		audio_ping.play()
+	else:
+		audio_hit.play()
+
+	label_hit.show()
+	await get_tree().create_timer(0.2).timeout
+	label_hit.hide()

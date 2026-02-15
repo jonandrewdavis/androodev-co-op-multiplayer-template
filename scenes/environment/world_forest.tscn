@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c06gks0biq762" path="res://scenes/environment/world_forest.gd" id="1_3pli8"]
 [ext_resource type="Texture2D" uid="uid://durlbko8p6y4e" path="res://assets/kenney_prototype-textures/Vector/texture_08.svg" id="1_b5dff"]
 [ext_resource type="Texture2D" uid="uid://blvb6t4n6gmvm" path="res://assets/kenney_prototype-textures/PNG/Green/texture_09.png" id="2_3pli8"]
+[ext_resource type="Texture2D" uid="uid://bhw872cknjxc8" path="res://assets/kenney_prototype-textures/PNG/Light/texture_06.png" id="4_1o1l2"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_mloxv"]
 
@@ -34,6 +35,43 @@ sky_material = SubResource("ProceduralSkyMaterial_b5dff")
 [sub_resource type="Environment" id="Environment_1o1l2"]
 background_mode = 2
 sky = SubResource("Sky_3pli8")
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_3pli8"]
+plane = Plane(1, 0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wskc"]
+albedo_texture = ExtResource("4_1o1l2")
+uv1_scale = Vector3(0.4, 0.4, 0.4)
+uv1_triplanar = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_dxoa6"]
+material = SubResource("StandardMaterial3D_0wskc")
+size = Vector2(50, 4)
+orientation = 0
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_1o1l2"]
+plane = Plane(-1, 0, 0, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_bpyjm"]
+material = SubResource("StandardMaterial3D_0wskc")
+flip_faces = true
+size = Vector2(50, 4)
+orientation = 0
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_j6fc8"]
+plane = Plane(0, 0, 1, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_1o1l2"]
+material = SubResource("StandardMaterial3D_0wskc")
+size = Vector2(50, 4)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_0wskc"]
+plane = Plane(0, 0, -1, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_j6fc8"]
+material = SubResource("StandardMaterial3D_0wskc")
+flip_faces = true
+size = Vector2(50, 4)
 
 [node name="WorldForest" type="Node3D" unique_id=451922858]
 script = ExtResource("1_3pli8")
@@ -90,5 +128,40 @@ shadow_enabled = true
 unique_name_in_owner = true
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=979900599]
-_spawnable_scenes = PackedStringArray("uid://c1yny3sauy8yu")
+_spawnable_scenes = PackedStringArray("uid://c1yny3sauy8yu", "uid://uo1xep4bn61c")
 spawn_path = NodePath("../SpawnContainer")
+
+[node name="Walls" type="StaticBody3D" parent="." unique_id=1600503577]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls" unique_id=1107086367]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_3pli8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/CollisionShape3D" unique_id=1310044925]
+mesh = SubResource("QuadMesh_dxoa6")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls" unique_id=256083918]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_1o1l2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/CollisionShape3D2" unique_id=1775018113]
+mesh = SubResource("QuadMesh_bpyjm")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Walls" unique_id=1129811154]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -25)
+shape = SubResource("WorldBoundaryShape3D_j6fc8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/CollisionShape3D3" unique_id=1944500788]
+mesh = SubResource("QuadMesh_1o1l2")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Walls" unique_id=1691928987]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25)
+shape = SubResource("WorldBoundaryShape3D_0wskc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/CollisionShape3D4" unique_id=71787573]
+mesh = SubResource("QuadMesh_j6fc8")
+
+[node name="TimerTargets" type="Timer" parent="." unique_id=2034331337]
+unique_name_in_owner = true
+wait_time = 10.0
+autostart = true
