@@ -5,7 +5,7 @@ const TUBE_CONTEXT = preload("uid://chqw3jdoon6c1")
 
 var enet_peer := ENetMultiplayerPeer.new()
 var tube_client := TubeClient.new()
-var tube_enabled = false
+var tube_enabled = true
 
 var PORT = 9999
 var IP_ADDRESS = '127.0.0.1'
