@@ -30,8 +30,8 @@ func _init() -> void:
 	if OS.get_name() == "Web":
 		return
 	
-	#port_mapping_ready.connect(_on_port_mapping_ready)
-	#task_ids.append(WorkerThreadPool.add_task(_upnp_init_task))
+	port_mapping_ready.connect(_on_port_mapping_ready)
+	task_ids.append(WorkerThreadPool.add_task(_upnp_init_task))
 
 
 func _upnp_init_task() -> void:

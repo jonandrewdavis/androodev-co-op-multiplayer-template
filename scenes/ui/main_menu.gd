@@ -24,6 +24,8 @@ func _ready() -> void:
 	input_session_id.text_changed.connect(func(_new): button_join_tube.disabled = false)
 	input_username.text_changed.connect(func(new_text): Global.username = new_text)
 	
+	Network.tube_client.error_raised.connect(on_error_raised)
+	
 	if OS.has_feature('server'):
 		Network.start_server()
 		add_world()
@@ -40,10 +42,12 @@ func on_tube_create():
 	Network.tube_create()
 	add_world()
 
+func on_error_raised(_code, _message):
+	input_session_id.text = ''
+	button_join_tube.add_theme_color_override("font_disabled_color", Color.DARK_RED)
+	button_join_tube.disabled = true
+	Network.clean_up_signals()
+
 func add_world():
 	get_tree().current_scene.add_child(WORLD_FOREST.instantiate())
 	hide()
-
-	
-	 
-	

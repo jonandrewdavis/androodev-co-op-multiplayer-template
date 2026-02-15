@@ -18,6 +18,8 @@ const JUMP_VELOCITY = 4.5
 @onready var button_copy_session: Button = %ButtonCopySession
 @onready var audio_hit: AudioStreamPlayer = %AudioHit
 @onready var audio_ping: AudioStreamPlayer = %AudioPing
+@onready var label_hit: Label = %LabelHit
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
 
 var immobile := false
 
@@ -26,12 +28,14 @@ func _enter_tree() -> void:
 
 func _ready():
 	menu.hide()
+	label_hit.hide()
 	add_to_group("Players")
 	nameplate.text = name
 
 	if not is_multiplayer_authority():
 		set_process(false)
 		set_physics_process(false)
+		canvas_layer.queue_free()
 		return
 	
 	camera_3d.current = true
@@ -113,3 +117,7 @@ func register_hit(is_dead = false):
 		audio_ping.play()
 	else:
 		audio_hit.play()
+
+	label_hit.show()
+	await get_tree().create_timer(0.2).timeout
+	label_hit.hide()

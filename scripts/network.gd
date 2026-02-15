@@ -13,7 +13,7 @@ func _ready():
 	tube_client.context = TUBE_CONTEXT
 	tube_client.name = 'TubeClient'
 	get_tree().root.add_child.call_deferred(tube_client, true)
-
+	
 func tube_create():
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(remove_player)
