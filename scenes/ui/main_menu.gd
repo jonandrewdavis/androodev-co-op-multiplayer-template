@@ -49,5 +49,5 @@ func on_error_raised(_code, _message):
 	Network.clean_up_signals()
 
 func add_world():
-	get_tree().current_scene.add_child(WORLD_FOREST.instantiate())
+	get_tree().current_scene.add_child.call_deferred(WORLD_FOREST.instantiate())
 	hide()

@@ -5,6 +5,7 @@ const TUBE_CONTEXT = preload("uid://chqw3jdoon6c1")
 
 var enet_peer := ENetMultiplayerPeer.new()
 var tube_client := TubeClient.new()
+var tube_enabled = false
 
 var PORT = 9999
 var IP_ADDRESS = '127.0.0.1'
@@ -12,7 +13,8 @@ var IP_ADDRESS = '127.0.0.1'
 func _ready():
 	tube_client.context = TUBE_CONTEXT
 	tube_client.name = 'TubeClient'
-	get_tree().root.add_child.call_deferred(tube_client, true)
+	if tube_enabled:
+		get_tree().root.add_child.call_deferred(tube_client, true)
 	
 func tube_create():
 	multiplayer.peer_connected.connect(add_player)
