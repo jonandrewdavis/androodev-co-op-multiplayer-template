@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+class_name Player
+
 @export var sensitivity: float = 0.002
 
 const SPEED = 5.0
@@ -14,6 +16,10 @@ const JUMP_VELOCITY = 4.5
 
 @onready var session_id: Label = %SessionId
 @onready var button_copy_session: Button = %ButtonCopySession
+@onready var audio_hit: AudioStreamPlayer = %AudioHit
+@onready var audio_ping: AudioStreamPlayer = %AudioPing
+@onready var label_hit: Label = %LabelHit
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
 
 var immobile := false
 
@@ -22,12 +28,14 @@ func _enter_tree() -> void:
 
 func _ready():
 	menu.hide()
+	label_hit.hide()
 	add_to_group("Players")
 	nameplate.text = name
 
 	if not is_multiplayer_authority():
 		set_process(false)
 		set_physics_process(false)
+		canvas_layer.queue_free()
 		return
 	
 	camera_3d.current = true
@@ -102,3 +110,14 @@ func get_shoot_direction() -> Vector3:
 	var raycast_start = camera_3d.project_ray_origin(viewport_rect / 2)
 	var raycast_end = raycast_start + camera_3d.project_ray_normal(viewport_rect / 2) * 280
 	return -(raycast_start - raycast_end).normalized()
+
+@rpc('any_peer', 'call_local')
+func register_hit(is_dead = false):
+	if is_dead:
+		audio_ping.play()
+	else:
+		audio_hit.play()
+
+	label_hit.show()
+	await get_tree().create_timer(0.2).timeout
+	label_hit.hide()

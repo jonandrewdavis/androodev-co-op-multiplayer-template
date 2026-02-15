@@ -72,7 +72,7 @@ text = "Username"
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="Control/Center/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=818622073]
+[node name="LabelSessionId" type="Label" parent="Control/Center/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=818622073]
 layout_mode = 2
 text = "Session ID"
 

@@ -128,7 +128,7 @@ shadow_enabled = true
 unique_name_in_owner = true
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=979900599]
-_spawnable_scenes = PackedStringArray("uid://c1yny3sauy8yu")
+_spawnable_scenes = PackedStringArray("uid://c1yny3sauy8yu", "uid://uo1xep4bn61c")
 spawn_path = NodePath("../SpawnContainer")
 
 [node name="Walls" type="StaticBody3D" parent="." unique_id=1600503577]
@@ -160,3 +160,8 @@ shape = SubResource("WorldBoundaryShape3D_0wskc")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/CollisionShape3D4" unique_id=71787573]
 mesh = SubResource("QuadMesh_j6fc8")
+
+[node name="TimerTargets" type="Timer" parent="." unique_id=2034331337]
+unique_name_in_owner = true
+wait_time = 10.0
+autostart = true

@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://dbcqeo103wau6"]
 
 [ext_resource type="Script" uid="uid://bqta7emfadpxj" path="res://scenes/player/player.gd" id="1_wr5hl"]
-[ext_resource type="Texture2D" uid="uid://pxj3b3e28fg3" path="res://addons/tube/inspector/icons/clipboard_icon.tres" id="2_gfjak"]
+[ext_resource type="AudioStream" uid="uid://cdov6nnydfvny" path="res://assets/sound/click.mp3" id="3_4kuee"]
+[ext_resource type="AudioStream" uid="uid://d0xrt28ytpro" path="res://assets/sound/ping.mp3" id="4_524rm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o8nba"]
 
@@ -22,6 +23,13 @@ properties/1/replication_mode = 1
 properties/2/path = NodePath("Nameplate:text")
 properties/2/spawn = true
 properties/2/replication_mode = 2
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4kuee"]
+load_path = "res://.godot/imported/icons_sheet_white.png-2f4a5023d48df0787006ef991a38d766.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_524rm"]
+atlas = SubResource("CompressedTexture2D_4kuee")
+region = Rect2(100, 1900, 100, 100)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gfjak"]
 content_margin_left = 0.0
@@ -120,12 +128,30 @@ size_flags_horizontal = 3
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/icon_max_width = 24
-icon = ExtResource("2_gfjak")
+icon = SubResource("AtlasTexture_524rm")
 
 [node name="ButtonLeave" type="Button" parent="CanvasLayer/Menu/PanelContainer/MarginContainer/VBoxContainer" unique_id=196040560]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Leave Game"
+
+[node name="LabelHit" type="Label" parent="CanvasLayer" unique_id=947015458]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.5
+offset_top = -17.0
+offset_right = 7.5
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1)
+pivot_offset_ratio = Vector2(0.5, 0)
+theme_override_font_sizes/font_size = 36
+text = "X"
 
 [node name="Reticle" type="PanelContainer" parent="CanvasLayer" unique_id=850415394]
 custom_minimum_size = Vector2(5, 5)
@@ -142,3 +168,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gfjak")
+
+[node name="AudioHit" type="AudioStreamPlayer" parent="." unique_id=1414008272]
+unique_name_in_owner = true
+stream = ExtResource("3_4kuee")
+
+[node name="AudioPing" type="AudioStreamPlayer" parent="." unique_id=339391477]
+unique_name_in_owner = true
+stream = ExtResource("4_524rm")

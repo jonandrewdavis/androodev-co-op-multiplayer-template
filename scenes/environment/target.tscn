@@ -13,6 +13,14 @@ albedo_texture = ExtResource("1_dvk77")
 material = SubResource("StandardMaterial3D_yyeac")
 size = Vector3(1, 2, 1)
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_386so"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+properties/1/path = NodePath(".:health")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+
 [node name="Target" type="RigidBody3D" unique_id=633570242]
 script = ExtResource("1_386so")
 
@@ -21,3 +29,6 @@ shape = SubResource("BoxShape3D_386so")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=35884400]
 mesh = SubResource("BoxMesh_8ha04")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1432818322]
+replication_config = SubResource("SceneReplicationConfig_386so")

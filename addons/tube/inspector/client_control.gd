@@ -48,8 +48,8 @@ var client: TubeClient:
 		if is_instance_valid(app_id_label):
 			app_id_label.text = client.context.app_id
 		
-		#if is_instance_valid(root_node_label):
-			#root_node_label.text = client.multiplayer_root_node.get_path()
+		if is_instance_valid(root_node_label):
+			root_node_label.text = client.multiplayer_root_node.get_path()
 		
 		detect_nat()
 		detect_upnp_port_mapping()
