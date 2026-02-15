@@ -12,7 +12,6 @@ var IP_ADDRESS = '127.0.0.1'
 
 func _ready():
 	tube_client.context = TUBE_CONTEXT
-	tube_client.name = 'TubeClient'
 	if tube_enabled:
 		get_tree().root.add_child.call_deferred(tube_client, true)
 	
