@@ -1,10 +1,12 @@
-# androo-dev-co-op-multiplayer
+# AndrooDev Friendslop Co-Op Tutorial PART 1
 
-A complete template and tutorial from [AndrooDev on YouTube](https://www.youtube.com/watch?v=NvG08tA06xQ). Uses client authority to make it easy to start a PVE or Co-Op multiplayer game from scratch.
+### IF YOU ARE HERE FOR PART 2 starter files: Look on the right at the releases
 
-|             Twitch             |              Youtube               |
-| :----------------------------: | :--------------------------------: |
-| https://www.twitch.tv/andoodev | https://www.youtube.com/@AndrooDev |
+A complete template and tutorial from [AndrooDev on YouTube](https://www.youtube.com/watch?v=NvG08tA06xQ). Uses client authority to make it easy to start a PVE or Co-Op multiplayer game from scratch. After Part 1, add on Tube with WebRTC in [Part 2 on YouTube](https://www.youtube.com/watch?v=wgIqB6JNcro)
+
+|             Twitch             |              Youtube               |                      Play now on Itch                       |
+| :----------------------------: | :--------------------------------: | :---------------------------------------------------------: |
+| https://www.twitch.tv/andoodev | https://www.youtube.com/@AndrooDev | https://androodev.itch.io/androodev-friendslop-co-op-sample |
 
 <img src="assets/docs/template_preview_1.png" width="500">
 
